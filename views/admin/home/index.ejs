@@ -1,0 +1,52 @@
+<% include ./partials/header%>
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('/menuImages/<%=foundMenus.menuImageName%>')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1><%=foundMenus.menuName%></h1>
+            <span class="subheading"><%=foundMenus.menuComSentence%></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <% foundBlogs.forEach((blog)=>{ %>
+    <div class="row">
+    <div class="col-lg-3 mx -auto">
+        <img  class="img-thumbnail" src="/blogImages/<%= blog.comImage %>" >
+    </div>
+      <div class="col-lg-9 mx-auto">
+         
+        <div class="post-preview">
+          <a href="/blogs/<%= blog._id %>">
+            <h2 class="post-title">
+              <%= blog.title %>
+            </h2>
+            <h3 class="post-subtitle">
+                <%= blog.comSentence %>
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on <%= blog.date %></p>
+        </div>
+        <hr>
+        <!-- Pager -->
+
+      </div>
+    </div>
+    <% }); %>
+  
+        <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+    </div>
+  <hr>
+
+<% include ./partials/footer%>

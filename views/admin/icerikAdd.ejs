@@ -1,0 +1,68 @@
+<% include ./adminPartials/header %>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+             <a href="/admin">Ana Sayfa</a>
+            </li>
+            <li class="breadcrumb-item active">İcerik Ekle</li>
+        </ol>
+        <div class="col-md-9 mx-auto">   
+            <form action="">
+                    <div class="form-group">
+                        <label for="icerikSelect">Menüler</label>
+                        <select class="form-control" id="icerikSelect" name="icerikSelect">
+                            <%blnMenu.forEach(function(menu){%>
+                                <option value="<%=menu._id%>"><%= menu.menuName%></option>
+
+                            <%});%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="icerikTitle">İçerik Başlık</label>
+                        <input type="text" class="form-control" id="icerikTitle" placeholder="İçerik Title" name="icerikTitle">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="editor" id="myTextArea" name="myTextArea"></textarea>
+                        <input type="text" id="trackingDiv" name="icerik" style="display:none">
+                    </div>
+                    <div class="form-group">
+                        <button id="myButton" class="btn btn-primary">Kaydet</button>
+                    </div>                      
+            </form>
+        </div>   
+    </div>
+    <script src="https://cdn.ckeditor.com/4.9.0/standard/ckeditor.js"></script>
+          <script>
+              CKEDITOR.replace('editor');
+              timer = setInterval(updateDiv,100);
+                function updateDiv(){
+                     var editorText = CKEDITOR.instances.myTextArea.getData();
+                     $('#trackingDiv').val(editorText);
+                    }
+    </script>
+     <script src="/adminShared/vendor/jquery/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           $("#myButton").click(function(){
+               var icerikTitle = $("#icerikTitle").val();
+               var menuid = $("#icerikSelect").val();
+               var menuname = $('#icerikSelect option:selected').text();
+               var icerik = CKEDITOR.instances.myTextArea.getData();
+
+               var data = {
+                   icerikTitle  :   icerikTitle,
+                   menuid:   menuid,
+                   menuname   :   menuname,
+                   icerik       :   icerik
+               }
+               $.post('/admin/icerik-ekle',{data:data})
+               .then(function(addedBlog){
+               });
+               
+           });
+
+        });   
+    </script>
+
+    <% include ./adminPartials/footer %>

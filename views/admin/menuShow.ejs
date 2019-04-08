@@ -1,0 +1,47 @@
+<% include ./adminPartials/header %>
+<div class="content-wrapper">
+    <div class="container-fluid">
+             <!-- Breadcrumbs-->
+         <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/admin">Ana Sayfa</a>
+                </li>
+                <li class="breadcrumb-item active">Menuler</li>
+              </ol>
+              <!-- Example DataTables Card-->
+              <div class="card mb-3">
+                <div class="card-header">
+                  <i class="fa fa-table"></i>Menu Tablosu</div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>Menü Adı</th>
+                          <th>Menü Resim</th>
+                          <th>Düzenle</th>
+                          <th>Sil</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% menuler.forEach(function(menu){ %>
+                            <tr>
+                                <td><%= menu.menuName %></td>
+                                <td><%= menu.menuImageName %></td>
+                                <td><a href="/admin/menu-duzenle/<%=menu._id%>">Düzenle</a></td>
+                                <td>
+                                  	<form action="/admin/menuler/<%=menu._id%>?_method=DELETE" method="POST">
+                                      <button class="btn btn-danger">Sil</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% });%>
+                       </tbody>
+                    </table>
+                   </div>
+                </div>
+            </div>      
+        </div>   
+    </div>
+  </div>
+  <% include ./adminPartials/footer %>

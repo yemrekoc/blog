@@ -1,0 +1,47 @@
+<% include ./adminPartials/header %>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+             <a href="/admin">Ana Sayfa</a>
+            </li>
+            <li class="breadcrumb-item active">Blog Ekle</li>
+        </ol>
+        <div class="col-md-9 mx-auto">   
+            <form action="/admin/bloglar/<%=bulunanBlog ._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="blogTitle">Blog Başlık</label>
+                        <input type="text" class="form-control" id="blogTitle"  name="blogTitle" value="<%= bulunanBlog.title %>">
+                    </div>
+                    <div class="form-group">
+                            <label for="blogComSen">Blog Reklam Cümlesi</label>
+                            <input type="text" class="form-control" id="blogComSen" value="<%= bulunanBlog.comSentence %>" name="blogComSen">
+                    </div>
+                    <div class="form-group">
+                        <label for="menuName">Menu Resmi</label><br>
+                        <img src="/blogImages/<%=bulunanBlog.comImage%>" alt="..." class="img-thumbnail">
+                    </div> 
+                    <div class="form-group">
+                            <label for="comImage">Blog Resmi</label>
+                            <input type="file" class="form-control" id="comImage" name="comImage">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="editor" id="myTextArea" name="myTextArea"></textarea>
+                        <input type="text" id="trackingDiv" name="blog" value="<%= bulunanBlog.blog %>" >
+                    </div>
+                    <div class="form-group">
+                        <button id="myButton" class="btn btn-primary">Kaydet</button>
+                    </div>                      
+            </form>
+        </div>   
+    </div>
+    <script src="https://cdn.ckeditor.com/4.9.0/standard/ckeditor.js"></script>
+          <script>
+              CKEDITOR.replace('editor');
+              timer = setInterval(updateDiv,100);
+                function updateDiv(){
+                     var editorText = CKEDITOR.instances.myTextArea.getData();
+                     $('#trackingDiv').val(editorText);
+                    }
+          </script>
+    <% include ./adminPartials/footer %>

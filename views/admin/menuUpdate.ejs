@@ -1,0 +1,31 @@
+<% include ./adminPartials/header %>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+             <a href="/admin">Ana Sayfa</a>
+            </li>
+            <li class="breadcrumb-item active">Menu Ekle</li>
+        </ol>
+        <div class="col-md-9 mx-auto">
+            <form action="/admin/menuler/<%=findingMenu._id%>?_method=PUT" method="POST" enctype="multipart/form-data" >
+                    <div class="form-group">
+                        <label for="menuName">Menu Adı</label>
+                        <input type="text" class="form-control" id="menuName"  name="menuname" value="<%=findingMenu.menuName%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="menuName">Menu Resmi</label><br>
+                        <img src="/Files/<%=findingMenu.menuImageName%>" alt="..." class="img-thumbnail">
+                    </div>        
+                    <div class="form-group">
+                            <label for="menuImage">Menu Resmi</label>
+                            <input type="file" class="form-control" id="menuImage" name="menuimage">
+                    </div>
+                    <div class="form-group">
+                        <button id="myButton" class="btn btn-primary">Submit</button>
+                    </div>                      
+            </form>
+        </div>   
+    </div>
+  </div>
+  <% include ./adminPartials/footer %>

@@ -1,0 +1,51 @@
+<% include ./adminPartials/header %>
+<div class="content-wrapper">
+    <div class="container-fluid">
+             <!-- Breadcrumbs-->
+         <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/admin">Ana Sayfa</a>
+                </li>
+                <li class="breadcrumb-item active">Bloglar</li>
+              </ol>
+              <!-- Example DataTables Card-->
+              <div class="card mb-3">
+                <div class="card-header">
+                  <i class="fa fa-table"></i>Blog Tablosu</div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>Blog Adı</th>
+                          <th>Blog Reklam Cümlesi</th>
+                          <th>Blog Resim</th>
+                          <th>Blog Tarih</th>
+                          <th>Düzenle</th>
+                          <th>Sil</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% bloglar.forEach(function(blog){ %>
+                            <tr>
+                                <td><%= blog.title %></td>
+                                <td><%= blog.comSentence %></td>
+                                <td><%= blog.comImage %></td>
+                                <td><%= blog.date %></td>
+                                <td><a href="/admin/blog-duzenle/<%=blog._id%>">Düzenle</a></td>
+                                <td>
+                                  	<form action="/admin/bloglar/<%=blog._id%>?_method=DELETE" method="POST">
+                                      <button class="btn btn-danger">Sil</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% });%>
+                       </tbody>
+                    </table>
+                   </div>
+                </div>
+            </div>      
+        </div>   
+    </div>
+  </div>
+  <% include ./adminPartials/footer %>
